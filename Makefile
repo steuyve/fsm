@@ -8,3 +8,6 @@ fsm: src/fsm.c
 
 test: fsm
 	$(CC) $(CFLAGS) -o bin/test bin/fsm.o test/test.c
+
+debug: fsm
+	$(CC) $(CFLAGS) -g -o bin/debug bin/fsm.o test/test.c

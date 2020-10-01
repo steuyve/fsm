@@ -41,5 +41,7 @@ int main(void)
 		show_state(eval_fsm(&ab_machine, line, linelen - 1));
 	}
 
+	free(line);
+
 	exit(EXIT_SUCCESS);
 }
