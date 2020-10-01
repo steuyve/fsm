@@ -1,12 +1,12 @@
-#ifndef LIBFSM_H
-#define LIBFSM_H
+#ifndef FSM_H
+#define FSM_H
 
 struct fsm_state {
 	char *name;
 	int accepting;
 };
 
-struct fsm_state REJECT_STATE = {"REJECT", 0};
+extern struct fsm_state REJECT_STATE;
 
 struct state_transition {
 	char input;
