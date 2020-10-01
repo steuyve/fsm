@@ -1,8 +1,8 @@
 CC=gcc
 CFLAGS=-Wall -Wextra -pedantic -std=c99
 
-fsm: src/fsm.c
+libfsm: src/libfsm.c
 	$(CC) -o bin/$@ $< $(CFLAGS)
 
-debug: src/fsm.c
+debug: src/libfsm.c
 	$(CC) -g -o bin/$@ $< $(CFLAGS)
