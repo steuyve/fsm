@@ -7,6 +7,7 @@
 //#include <stdlib.h>
 #include <stdio.h>
 #include <sys/types.h>
+#include <string.h>
 #include "fsm.h"
 
 struct fsm_state REJECT_STATE = {"REJECT", 0};
@@ -40,10 +41,10 @@ struct fsm_state *step_fsm(struct fsm *machine, struct fsm_state *current, int i
 	return &REJECT_STATE;
 }
 
-struct fsm_state *eval_fsm(struct fsm *machine, const char *input, ssize_t linelen)
+struct fsm_state *eval_fsm(struct fsm *machine, const char *input)
 {
 	struct fsm_state *curr_state = machine->initial;
-	for (int i = 0; i < linelen; i++) {
+	for (size_t i = 0; i < strlen(input); i++) {
 		curr_state = step_fsm(machine, curr_state, input[i]);
 	}
 

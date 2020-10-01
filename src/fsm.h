@@ -27,6 +27,6 @@ int in_alphabet(int, const char *);
 
 struct fsm_state *step_fsm(struct fsm *, struct fsm_state *, int);
 
-struct fsm_state *eval_fsm(struct fsm *, const char *, ssize_t);
+struct fsm_state *eval_fsm(struct fsm *, const char *);
 
 #endif
