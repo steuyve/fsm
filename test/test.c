@@ -1,5 +1,3 @@
-#define _POSIX_C_SOURCE 200809L
-
 #include <stdlib.h>
 #include <stdio.h>
 #include "../src/fsm.h"
@@ -73,18 +71,30 @@ void abstar(struct fsm *machine)
 int main(void)
 {
 	struct fsm *machine = (struct fsm *)malloc(sizeof(struct fsm));
+	printf("Testing final state for empty machine on input \"\\n\" should be REJECT and should NOT be accepting.\n");
+	show_state(eval_fsm(machine, "\n"));
 
 	printf("Making machine a*b*...\n");
 	astarbstar(machine);
+	printf("Testing final state for machine a*b* on input \"\\n\" should be REJECT and should NOT be accepting.\n");
+	show_state(eval_fsm(machine, "\n"));
 	printf("Testing final state for machine a*b* on input \"aaa\" should be s0 and should be accepting.\n");
-	show_state(eval_fsm(machine, "aaa", 3));
+	show_state(eval_fsm(machine, "aaa"));
 	printf("Testing final state for machine a*b* on input \"bbb\" should be s1 and should be accepting.\n");
-	show_state(eval_fsm(machine, "bbb", 3));
+	show_state(eval_fsm(machine, "bbb"));
+	printf("Testing final state for machine a*b* on input \"abb\" should be s1 and should be accepting.\n");
+	show_state(eval_fsm(machine, "abb"));
+	printf("Testing final state for machine a*b* on input \"aba\" should be REJECT and should NOT be accepting.\n");
+	show_state(eval_fsm(machine, "aba"));
 
 	printf("Making machine (ab)*...\n");
-	abstar(machine);
-	printf("Testing final state for machine (ab)* on input \"abab\" should be s1 and should be accepting.\n");
-	show_state(eval_fsm(machine, "abab", 4));
+	abstar(machine); 
+	printf("Testing final state for machine (ab)* on input \"\\n\" should be REJECT and should NOT be accepting.\n");
+	show_state(eval_fsm(machine, "\n"));
+	printf("Testing final state for machine (ab)* on input \"abab\" should be s0 and should be accepting.\n");
+	show_state(eval_fsm(machine, "abab"));
+	printf("Testing final state for machine (ab)* on input \"aba\" should be s1 and should NOT be accepting.\n");
+	show_state(eval_fsm(machine, "aba"));
 
 	/*
 	char *line = NULL;
