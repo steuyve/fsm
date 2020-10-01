@@ -6,7 +6,6 @@
 
 int main(void)
 {
-	printf("HELLO WORLD\n");
 	/*
 	// The example below shows the building of a FSM that accepts the language (ab)*.
 	struct fsm_state s_0 = {"s_0", 1};
