@@ -6,7 +6,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
+#include <sys/types.h>
 #include "libfsm.h"
 
 void show_state(struct fsm_state *state)
