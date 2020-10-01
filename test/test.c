@@ -96,16 +96,5 @@ int main(void)
 	printf("Testing final state for machine (ab)* on input \"aba\" should be s1 and should NOT be accepting.\n");
 	show_state(eval_fsm(machine, "aba"));
 
-	/*
-	char *line = NULL;
-	size_t linecap = 0;
-	ssize_t linelen;
-	while ((linelen = getline(&line, &linecap, stdin)) != -1) {
-		show_state(eval_fsm(&ab_machine, line, linelen - 1));
-	}
-
-	free(line);
-	*/
-
 	exit(EXIT_SUCCESS);
 }
