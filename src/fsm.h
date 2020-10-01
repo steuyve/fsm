@@ -17,6 +17,7 @@ struct state_transition {
 struct fsm {
 	const char *alphabet;
 	struct fsm_state *initial;
+	struct fsm_state *final_state;
 	int num_transitions;
 	struct state_transition *table;
 };
@@ -27,6 +28,6 @@ int in_alphabet(int, const char *);
 
 struct fsm_state *step_fsm(struct fsm *, struct fsm_state *, int);
 
-struct fsm_state *eval_fsm(struct fsm *, const char *);
+int eval_fsm(struct fsm *, const char *);
 
 #endif
