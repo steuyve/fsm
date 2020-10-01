@@ -7,26 +7,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-
-struct fsm_state {
-	char *name;
-	int accepting;
-};
-
-struct fsm_state REJECT_STATE = {"REJECT", 0};
-
-struct state_transition {
-	char input;
-	struct fsm_state *in_state;
-	struct fsm_state *out_state;
-};
-
-struct fsm {
-	const char* alphabet;
-	struct fsm_state *initial;
-	int num_transitions;
-	struct state_transition *table;
-};
+#include "libfsm.h"
 
 void show_state(struct fsm_state *state)
 {
