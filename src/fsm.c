@@ -4,7 +4,6 @@
 
 #define _POSIX_C_SOURCE 200809L
 
-//#include <stdlib.h>
 #include <stdio.h>
 #include <sys/types.h>
 #include <string.h>
@@ -75,4 +74,3 @@ int eval_fsm(struct fsm *machine, const char *input)
 	machine->final_state = curr_state;
 	return NORMAL;
 }
-
