@@ -124,6 +124,10 @@ int main(void)
 		convert_code(res);
 	}
 
+	free(machine->initial);
+	free(machine->final_state);
+	free(machine->table);
+
 	printf("Making machine (ab)*...\n");
 	abstar(machine); 
 
@@ -151,5 +155,9 @@ int main(void)
 		convert_code(res);
 	}
 	
+	free(machine->initial);
+	free(machine->final_state);
+	free(machine->table);
+	free(machine);
 	exit(EXIT_SUCCESS);
 }
