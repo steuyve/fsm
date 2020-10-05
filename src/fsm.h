@@ -1,6 +1,13 @@
 #ifndef FSM_H
 #define FSM_H
 
+enum eval_codes {
+	NORMAL,
+	NO_ALPHABET_FOUND,
+	NOT_IN_ALPHABET,
+	NO_TRANSITION_FOUND
+};
+
 struct fsm_state {
 	char *name;
 	int accepting;
@@ -24,7 +31,9 @@ struct fsm {
 
 void show_state(struct fsm_state *);
 
-int in_alphabet(int, const char *);
+void convert_code(enum eval_codes);
+
+int in_alphabet(char, const char *);
 
 struct fsm_state *step_fsm(struct fsm *, struct fsm_state *, int);
 

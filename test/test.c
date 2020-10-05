@@ -73,30 +73,83 @@ void abstar(struct fsm *machine)
 int main(void)
 {
 	struct fsm *machine = (struct fsm *)malloc(sizeof(struct fsm));
-	printf("Testing final state for empty machine on input \"\\n\" should be REJECT and should NOT be accepting.\n");
-	if (eval_fsm(machine, "\n") == 0) show_state(machine->final_state);
+	printf("Testing empty machine on input \"\\n\" should raise NO ALPHABET FOUND error.\n");
+	enum eval_codes res = eval_fsm(machine, "\n");
+	if (res == 0) {
+		show_state(machine->final_state);
+	} else {
+		convert_code(res);
+	}
 
 	printf("Making machine a*b*...\n");
 	astarbstar(machine);
-	// printf("Testing final state for machine a*b* on input \"\\n\" should be REJECT and should NOT be accepting.\n");
-	// show_state(eval_fsm(machine, "\n"));
+
+	printf("Testing machine a*b* on input \"\\n\" should raise NOT IN ALPHABET error.\n");
+	res = eval_fsm(machine, "\n");
+	if (res == 0) {
+		show_state(machine->final_state);
+	} else {
+		convert_code(res);
+	}
+
 	printf("Testing final state for machine a*b* on input \"aaa\" should be s0 and should be accepting.\n");
-	if (eval_fsm(machine, "aaa") == 0) show_state(machine->final_state);
+	res = eval_fsm(machine, "aaa");
+	if (res == 0) {
+		show_state(machine->final_state);
+	} else {
+		convert_code(res);
+	}
+
 	printf("Testing final state for machine a*b* on input \"bbb\" should be s1 and should be accepting.\n");
-	if (eval_fsm(machine, "bbb") == 0) show_state(machine->final_state);
+	res = eval_fsm(machine, "bbb");
+	if (res == 0) {
+		show_state(machine->final_state);
+	} else {
+		convert_code(res);
+	}
+
 	printf("Testing final state for machine a*b* on input \"abb\" should be s1 and should be accepting.\n");
-	if (eval_fsm(machine, "abb") == 0) show_state(machine->final_state);
-	printf("Testing final state for machine a*b* on input \"aba\" should be REJECT and should NOT be accepting.\n");
-	if (eval_fsm(machine, "aba") == 0) show_state(machine->final_state);
+	res = eval_fsm(machine, "abb");
+	if (res == 0) {
+		show_state(machine->final_state);
+	} else {
+		convert_code(res);
+	}
+
+	printf("Testing machine a*b* on input \"aba\" should raise NO TRANSITION FOUND error.\n");
+	res = eval_fsm(machine, "aba");
+	if (res == 0) {
+		show_state(machine->final_state);
+	} else {
+		convert_code(res);
+	}
 
 	printf("Making machine (ab)*...\n");
 	abstar(machine); 
-	printf("Testing final state for machine (ab)* on input \"\\n\" should be REJECT and should NOT be accepting.\n");
-	if (eval_fsm(machine, "\n") == 0) show_state(machine->final_state);
-	printf("Testing final state for machine (ab)* on input \"abab\" should be s0 and should be accepting.\n");
-	if (eval_fsm(machine, "abab") == 0) show_state(machine->final_state);
-	printf("Testing final state for machine (ab)* on input \"aba\" should be s1 and should NOT be accepting.\n");
-	if (eval_fsm(machine, "aba") == 0) show_state(machine->final_state);
 
+	printf("Testing machine (ab)* on input \"\\n\" should raise NOT IN ALPHABET error.\n");
+	res = eval_fsm(machine, "\n");
+	if (res == 0) {
+		show_state(machine->final_state);
+	} else {
+		convert_code(res);
+	}
+
+	printf("Testing final state for machine (ab)* on input \"abab\" should be s0 and should be accepting.\n");
+	res = eval_fsm(machine, "abab");
+	if (res == 0) {
+		show_state(machine->final_state);
+	} else {
+		convert_code(res);
+	}
+
+	printf("Testing final state for machine (ab)* on input \"aba\" should be s1 and should NOT be accepting.\n");
+	res = eval_fsm(machine, "aba");
+	if (res == 0) {
+		show_state(machine->final_state);
+	} else {
+		convert_code(res);
+	}
+	
 	exit(EXIT_SUCCESS);
 }

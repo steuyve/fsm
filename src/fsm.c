@@ -17,7 +17,28 @@ void show_state(struct fsm_state *state)
 	printf("Final state: %s; Accepting: %d\n", state->name, state->accepting);
 }
 
-int in_alphabet(int input, const char *alphabet)
+void convert_code(enum eval_codes code)
+{
+	switch (code) {
+		case NORMAL:
+			fprintf(stderr, "NORMAL\n");
+			break;
+		case NO_ALPHABET_FOUND:
+			fprintf(stderr, "NO ALPHABET FOUND\n");
+			break;
+		case NOT_IN_ALPHABET:
+			fprintf(stderr, "NOT IN ALPHABET\n");
+			break;
+		case NO_TRANSITION_FOUND:
+			fprintf(stderr, "NO TRANSITION FOUND\n");
+			break;
+		default:
+			fprintf(stderr, "UNRECOGNIZED CODE\n");
+			break;
+	}
+}
+
+int in_alphabet(char input, const char *alphabet)
 {
 	int i = 0;
 	while (alphabet[i] != '\0') {
@@ -43,12 +64,15 @@ struct fsm_state *step_fsm(struct fsm *machine, struct fsm_state *current, int i
 
 int eval_fsm(struct fsm *machine, const char *input)
 {
+	if (machine->alphabet == NULL) return NO_ALPHABET_FOUND;
 	struct fsm_state *curr_state = machine->initial;
 	for (size_t i = 0; i < strlen(input); i++) {
+		if (!in_alphabet(input[i], machine->alphabet)) return NOT_IN_ALPHABET;
 		curr_state = step_fsm(machine, curr_state, input[i]);
+		if (curr_state == &REJECT_STATE) return NO_TRANSITION_FOUND;
 	}
 
 	machine->final_state = curr_state;
-	return 0;
+	return NORMAL;
 }
 
