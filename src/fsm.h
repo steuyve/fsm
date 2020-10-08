@@ -39,4 +39,6 @@ struct fsm_state *step_fsm(struct fsm *, struct fsm_state *, int);
 
 int eval_fsm(struct fsm *, const char *);
 
+void destroy_fsm(struct fsm *);
+
 #endif

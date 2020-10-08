@@ -4,6 +4,7 @@
 
 #define _POSIX_C_SOURCE 200809L
 
+#include <stdlib.h>
 #include <stdio.h>
 #include <sys/types.h>
 #include <string.h>
@@ -74,4 +75,16 @@ int eval_fsm(struct fsm *machine, const char *input)
 
 	machine->final_state = curr_state;
 	return NORMAL;
+}
+
+void destroy_fsm(struct fsm *machine)
+{
+	free(machine->initial);
+	free(machine->final_state);
+	struct state_transition *tmp;
+	while (machine->table != NULL) {
+		tmp = machine->table;
+		machine->table = machine->table->next;
+		free(tmp);
+	}
 }

@@ -120,9 +120,7 @@ int main(void)
 		convert_code(res);
 	}
 
-	free(machine->initial);
-	free(machine->final_state);
-	free(machine->table);
+	destroy_fsm(machine);
 
 	printf("Making machine (ab)*...\n");
 	abstar(machine); 
@@ -151,9 +149,7 @@ int main(void)
 		convert_code(res);
 	}
 	
-	free(machine->initial);
-	free(machine->final_state);
-	free(machine->table);
+	destroy_fsm(machine);
 	free(machine);
 	exit(EXIT_SUCCESS);
 }
