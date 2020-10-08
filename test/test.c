@@ -27,16 +27,14 @@ void astarbstar(struct fsm *machine)
 	s12s1->in_state = ps1;
 	s12s1->out_state = ps1;
 
-	struct state_transition *table = (struct state_transition *)malloc(3 * sizeof(struct state_transition));
-	table[0] = *s02s0;
-	table[1] = *s02s1;
-	table[2] = *s12s1;
+	s02s0->next = s02s1;
+	s02s1->next = s12s1;
+	s12s1->next = NULL;
 
 	machine->alphabet = "ab";
 	machine->initial = ps0;
 	machine->final_state = ps0;
-	machine->num_transitions = 3;
-	machine->table = table;
+	machine->table = s02s0;
 }
 
 void abstar(struct fsm *machine)
@@ -59,15 +57,13 @@ void abstar(struct fsm *machine)
 	s12s0->in_state = ps1;
 	s12s0->out_state = ps0;
 
-	struct state_transition *table = (struct state_transition *)malloc(2 * sizeof(struct state_transition));
-	table[0] = *s02s1;
-	table[1] = *s12s0;
+	s02s1->next = s12s0;
+	s12s0->next = NULL;
 
 	machine->alphabet = "ab";
 	machine->initial = ps0;
 	machine->final_state = ps0;
-	machine->num_transitions = 2;
-	machine->table = table;
+	machine->table = s02s1;
 }
 
 int main(void)

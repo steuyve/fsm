@@ -19,13 +19,13 @@ struct state_transition {
 	char input;
 	struct fsm_state *in_state;
 	struct fsm_state *out_state;
+	struct state_transition *next;
 };
 
 struct fsm {
 	const char *alphabet;
 	struct fsm_state *initial;
 	struct fsm_state *final_state;
-	int num_transitions;
 	struct state_transition *table;
 };
 

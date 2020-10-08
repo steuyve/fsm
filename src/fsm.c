@@ -52,9 +52,10 @@ int in_alphabet(char input, const char *alphabet)
 
 struct fsm_state *step_fsm(struct fsm *machine, struct fsm_state *current, int input)
 {
-	for (int i = 0; i < machine->num_transitions; i++) {
-		if (input == machine->table[i].input && current == machine->table[i].in_state) {
-			return machine->table[i].out_state;
+	struct state_transition *curr_trans;
+	for (curr_trans = machine->table; curr_trans != NULL; curr_trans = curr_trans->next) {
+		if (input == curr_trans->input && current == curr_trans->in_state) {
+			return curr_trans->out_state;
 		}
 	}
 
